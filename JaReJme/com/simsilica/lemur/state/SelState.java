@@ -39,11 +39,14 @@ import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.event.MouseButtonEvent;
 import com.jme3.input.event.MouseMotionEvent;
+import com.jme3.math.Matrix3f;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.simsilica.lemur.Button;
@@ -130,8 +133,7 @@ public abstract class SelState extends BaseAppState {
             if (keyPressed) {
                 contactMarkPoint = coli.getContactPoint();
                 contactSelTF = selTF;
-                int[] xy = new int[]{
-                    (int) (contactMarkPoint.getX()), (int) (contactMarkPoint.getY())};
+                int[] xy = calcXY(selTF, contactMarkPoint);
                 int[] lines = selTF.getTextlinesbyCoordinates(xy);
                 warwas = (cBeginMark >= 0);
                 cBeginMark = -1;
@@ -143,8 +145,7 @@ public abstract class SelState extends BaseAppState {
                 }
             } else if (cBeginMark >= 0) {
                 Vector3f contactPoint = coli.getContactPoint();
-                int[] xy = new int[]{
-                    (int) (contactPoint.getX()), (int) (contactPoint.getY())};
+                int[] xy = calcXY(selTF, contactPoint);
                 int[] lines = selTF.getTextlinesbyCoordinates(xy);
                 if (null != documentModel.findCaratValue(lines)) {
                     int cEndMark = (int) documentModel.findCaratValue(lines);
@@ -182,8 +183,7 @@ public abstract class SelState extends BaseAppState {
             SelDocumentModel documentModel = selTF.getDocumentModel();
             if (cBeginMark >= 0 && contactSelTF == selTF && contactMarkPoint.getX() != 0 && contactMarkPoint.getY() != 0) {
                 Vector3f contactPoint = coli.getContactPoint();
-                int[] xy = new int[]{
-                    (int) (contactPoint.getX()), (int) (contactPoint.getY())};
+                int[] xy = calcXY(selTF, contactPoint);
                 int[] lines = selTF.getTextlinesbyCoordinates(xy);
                 int cBeginMarkLocal = cBeginMark;
                 if (null != documentModel.findCaratValue(lines)) {
@@ -201,6 +201,14 @@ public abstract class SelState extends BaseAppState {
             }
         }
         return warwas;
+    }
+
+    protected int[] calcXY(Node n, Vector3f v) {
+        Quaternion q = n.getWorldRotation();
+        Matrix3f m = q.inverse().toRotationMatrix();
+        Vector3f tr = n.getWorldTranslation();
+        Vector3f p = (tr.add(m.mult(v.subtract(tr))));
+        return new int[]{(int) (p.getX()), (int) (p.getY())};
     }
 
     protected boolean menuSelectedTextField(boolean keyPressed) {
