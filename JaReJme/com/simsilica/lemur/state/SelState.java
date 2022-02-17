@@ -64,7 +64,7 @@ import java.util.Iterator;
  *
  * @author Janusch Rentenatus
  */
-public abstract class SelState extends BaseAppState {
+public class SelState extends BaseAppState {
 
     private final Node rootNode;
     private final ViewPort view;
