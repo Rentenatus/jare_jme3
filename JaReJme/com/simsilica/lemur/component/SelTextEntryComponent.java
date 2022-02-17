@@ -45,7 +45,6 @@ import com.jme3.font.BitmapFont.VAlign;
 import com.jme3.font.Rectangle;
 import com.jme3.input.KeyInput;
 import com.jme3.input.event.KeyInputEvent;
-import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.*;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -223,7 +222,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
 
     private int scrollMode;
     private int maxLinecount; //max numbers of lines
-    private ColorRGBA selectorColor = new ColorRGBA(0, 0, 255, 0.25f);
+    private ColorRGBA selectorColor = new ColorRGBA(0.2f, 0.3f, 0.4f, 1f);
     private int txtselmodeint;
     private int offset_x = 0;
     private Quad textselectQuad;
@@ -261,7 +260,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         cursor = new Geometry("cursor", cursorQuad);
         GuiMaterial mat = GuiGlobals.getInstance().createMaterial(new ColorRGBA(1, 1, 1, 0.75f), false);
         cursor.setMaterial(mat.getMaterial());
-        cursor.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
+        //cursor.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         cursor.setUserData("layer", 1);
         bitmapText.attachChild(cursor);
 
@@ -271,6 +270,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         if (isTextselect()) {
             makeTextselectQuads();
         }
+
     }
 
     @Override
@@ -287,7 +287,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         result.cursor = new Geometry("cursor", cursorQuad);
         GuiMaterial mat = GuiGlobals.getInstance().createMaterial(new ColorRGBA(1, 1, 1, 0.75f), false);
         result.cursor.setMaterial(mat.getMaterial());
-        result.cursor.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
+        //result.cursor.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         result.bitmapText.attachChild(cursor);
         result.resetText();
 
@@ -625,7 +625,6 @@ public class SelTextEntryComponent extends AbstractGuiComponent
     }
 
     public void setText(String text) {
-        // geändert von getText
         if (text != null && text.equals(model.getfulltext())) {
             return;
         }
@@ -962,27 +961,27 @@ public class SelTextEntryComponent extends AbstractGuiComponent
      * position as necessary.
      */
     // Das GUICONTROL hat in seinem Update die Funktion GUIUPDATEListener
-    // Der UpdateListener wurde in Zeile 197 hinzugefügt (nur für TextEntryComponenten)
+    // Der UpdateListener wurde hinzugefuegt (nur fuer TextEntryComponenten)
     // laufen die Updates, laufen auch die ControlUpdates
     // Das GUI Control ist ein Control
-    // Somit läuft bei den TextEntryComponenten dieses Update
+    // Somit laeuft bei den TextEntryComponenten dieses Update
     // Bei den anderen Elementen nicht!
     private class ModelChecker implements GuiUpdateListener {
 
         @Override
         public void guiUpdate(GuiControl source, float tpf) {
-            if (modelRef.update()) { // TextModell (also Buchstaben) haben sich geändert
+            if (modelRef.update()) { // TextModell changed
                 resetText();
                 if (isTextselect()) {
                     makeTextselectQuads();
                     ancRef.update();
                 }
             }
-            if (caratRef.update()) {  // cursorPosition hat sich geändert
+            if (caratRef.update()) {  // cursorPosition changed
                 resetCursorPosition();
             }
 
-            if (ancRef.update()) { // Anchors haben sich geändert
+            if (ancRef.update()) { // Anchors changed
                 if (isTextselect()) {
                     makeTextselectQuads();
                 }
@@ -1461,11 +1460,19 @@ public class SelTextEntryComponent extends AbstractGuiComponent
                 selectbar = new Geometry("selectbar" + z, textselectQuad);
                 z++;
                 selectbar.setMaterial(mat.getMaterial());
-                selectbar.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
+                //mat.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
                 selectbar.setUserData("SelectorNumber", z);
                 selectorNode.attachChild(selectbar);
+                selectbar.setLocalTranslation(xstart, y, 0.006f);
 
-                selectbar.setLocalTranslation(xstart, y, 0.01f);
+                BitmapText newText = new BitmapText(bitmapText.getFont());
+                newText.setLineWrapMode(LineWrapMode.Clip);
+                newText.setText(getText());
+                newText.setColor(bitmapText.getColor());
+                newText.setLocalTranslation(bitmapText.getLocalTranslation());
+                newText.setSize(getFontSize());
+                newText.setLocalTranslation(0, 0, 0.009f);
+                selectorNode.attachChild(newText);
             }
         }
         bitmapText.attachChild(selectorNode);

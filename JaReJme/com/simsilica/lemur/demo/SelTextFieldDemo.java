@@ -34,6 +34,7 @@
 package com.simsilica.lemur.demo;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
 import com.simsilica.lemur.Container;
@@ -75,25 +76,26 @@ public class SelTextFieldDemo extends SimpleApplication {
         SelState selState = new SelState(this, getViewPort(), rootNode);
         stateManager.attach(selState);
 
-        Node t1 = testUI(selState);
+        Node t1 = testUI(selState, new ColorRGBA(0.6f, 0f, 0f, 1f));
         rootNode.attachChild(t1);
         t1.setLocalTranslation(-12, 0, -400);
         t1.rotate(0f, -1f, 0.8f);
-        t1.scale(1.2f);
+        t1.scale(1.5f);
 
-        Node t2 = testUI(selState);
+        Node t2 = testUI(selState, new ColorRGBA(0f, 0.6f, 0f, 1f));
         rootNode.attachChild(t2);
         t2.setLocalTranslation(-12, 0, -400);
         t2.rotate(0f, 1f, 3.8f);
         t2.scale(0.8f);
 
-        Node t3 = testUI(selState);
+        Node t3 = testUI(selState, new ColorRGBA(0.2f, 0.4f, 1f, 1f));
         rootNode.attachChild(t3);
         t3.setLocalTranslation(-12, 0, -401);
+        t1.scale(1.2f);
 
     }
 
-    public Node testUI(SelState selState) {
+    public Node testUI(SelState selState, ColorRGBA col) {
 
         // Create a simple container for our elements
         Container myWindow = new Container();
@@ -105,7 +107,9 @@ public class SelTextFieldDemo extends SimpleApplication {
         SelTextField tf = new SelTextField("1234567890");
         myWindow.addChild(tf);
         selState.addControlTo(tf);
-
+        tf.setSelectColor(col);
+        //tf.setQueueBucket(RenderQueue.Bucket.Transparent);
+        //tf.setColor(new ColorRGBA(1f, 1f, 1f, 0.25f));
         return myWindow;
     }
 

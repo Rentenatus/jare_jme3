@@ -199,7 +199,7 @@ public class TextEntryDemoState extends BaseAppState {
 
         document.reverseSelect(0,2);
         //  textField.setselectcolor(new ColorRGBA(ColorRGBA.randomColor()));
-        textField.setselectcolor(new ColorRGBA(ColorRGBA.Red));
+        textField.setSelectColor(new ColorRGBA(ColorRGBA.Red));
 
         //  textField.scale(0.5f,0.8f,1);
     }
@@ -349,10 +349,10 @@ public class TextEntryDemoState extends BaseAppState {
     protected void Color() {
         // our textselect can have different colors
         // please note, that the alpha will be ignored and is always 0.25
-        if (textField.getselectColor().equals(new ColorRGBA(0,0,255,0.25f))) {
-            textField.setselectcolor(new ColorRGBA(ColorRGBA.randomColor()));
+        if (textField.getSelectColor().equals(new ColorRGBA(0,0,255,0.25f))) {
+            textField.setSelectColor(new ColorRGBA(ColorRGBA.randomColor()));
         } else {
-            textField.setselectcolor(new ColorRGBA(0,0,255,0.25f));
+            textField.setSelectColor(new ColorRGBA(0,0,255,0.25f));
         }
     }
 

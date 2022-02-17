@@ -359,11 +359,11 @@ public class SelTextField extends Panel {
     }
 
     @StyleAttribute("TextselectColor")
-    public void setselectcolor(ColorRGBA newColor) {
+    public void setSelectColor(ColorRGBA newColor) {
         text.resetSelectColor(newColor);
     }
 
-    public ColorRGBA getselectColor() {
+    public ColorRGBA getSelectColor() {
         return text.getselectColor();
     }
 
