@@ -101,7 +101,7 @@ public class SelTextFieldDemo extends SimpleApplication {
         Container myWindow = new Container();
 
         // Add some elements
-        Label aLabel = myWindow.addChild(new Label("Hello world."));
+        Label aLabel = myWindow.addChild(new Label("Use popup menu too."));
         myWindow.addChild(aLabel);
 
         SelTextField tf = new SelTextField("1234567890");

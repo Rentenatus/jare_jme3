@@ -73,7 +73,7 @@ import com.simsilica.lemur.text.SelDocumentModel;
 
 /**
  * A basic text entry component that allows displaying and editing of text based
- * on a DocumentModel. Default key bindings are setup for common navigation
+ * on a SelDocumentModel. Default key bindings are setup for common navigation
  * functions and the key input is taken over while the component has focus.
  *
  * @author Paul Speed
@@ -691,7 +691,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
 
     @Override
     public void reshape(Vector3f pos, Vector3f size) {
-        bitmapText.setLocalTranslation(pos.x, pos.y, pos.z);
+        bitmapText.setLocalTranslation(pos.x, pos.y, pos.z + 0.009f);
         textBox = new Rectangle(0, 0, size.x, size.y);
         bitmapText.setBox(textBox);
         resetAlignment();
@@ -1463,16 +1463,8 @@ public class SelTextEntryComponent extends AbstractGuiComponent
                 //mat.getMaterial().getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
                 selectbar.setUserData("SelectorNumber", z);
                 selectorNode.attachChild(selectbar);
-                selectbar.setLocalTranslation(xstart, y, 0.006f);
+                selectbar.setLocalTranslation(xstart, y, -0.006f);
 
-                BitmapText newText = new BitmapText(bitmapText.getFont());
-                newText.setLineWrapMode(LineWrapMode.Clip);
-                newText.setText(getText());
-                newText.setColor(bitmapText.getColor());
-                newText.setLocalTranslation(bitmapText.getLocalTranslation());
-                newText.setSize(getFontSize());
-                newText.setLocalTranslation(0, 0, 0.009f);
-                selectorNode.attachChild(newText);
             }
         }
         bitmapText.attachChild(selectorNode);
