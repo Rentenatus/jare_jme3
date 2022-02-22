@@ -76,7 +76,7 @@ public class SelTextFieldDemo extends SimpleApplication {
         SelState selState = new SelState(this, getViewPort(), rootNode);
         stateManager.attach(selState);
 
-        Node t1 = testUI(selState, new ColorRGBA(0.6f, 0f, 0f, 1f));
+        Node t1 = testUI(selState, new ColorRGBA(0.6f, 0f, 0f, 1f), new ColorRGBA(0f, 0.4f, 0.3f, 1f));
         rootNode.attachChild(t1);
         t1.setLocalTranslation(-12, 0, -400);
         t1.rotate(0f, -1f, 0.8f);
@@ -88,7 +88,7 @@ public class SelTextFieldDemo extends SimpleApplication {
         t2.rotate(0f, 1f, 3.8f);
         t2.scale(0.8f);
 
-        Node t3 = testUI(selState, new ColorRGBA(0.2f, 0.4f, 1f, 1f));
+        Node t3 = testUI(selState, new ColorRGBA(0.2f, 0.4f, 0.7f, 1f), new ColorRGBA(0.8f, 0.3f, 0.2f, 1f));
         rootNode.attachChild(t3);
         t3.setLocalTranslation(-12, 0, -401);
         t1.scale(1.2f);
@@ -96,20 +96,27 @@ public class SelTextFieldDemo extends SimpleApplication {
     }
 
     public Node testUI(SelState selState, ColorRGBA col) {
+        SelTextField tf = new SelTextField("1234567890");
+        selState.addControlTo(tf);
+        tf.setSelectColor(col);
+        return testUI(tf);
+    }
 
+    public Node testUI(SelState selState, ColorRGBA colA, ColorRGBA colB) {
+        SelTextField tf = new SelTextField("1234567890");
+        selState.addControlTo(tf);
+        tf.resetSelectColor(colA, colA, colB, colB);
+        return testUI(tf);
+    }
+
+    public Node testUI(SelTextField tf) {
         // Create a simple container for our elements
         Container myWindow = new Container();
 
         // Add some elements
         Label aLabel = myWindow.addChild(new Label("Use popup menu too."));
         myWindow.addChild(aLabel);
-
-        SelTextField tf = new SelTextField("1234567890");
         myWindow.addChild(tf);
-        selState.addControlTo(tf);
-        tf.setSelectColor(col);
-        //tf.setQueueBucket(RenderQueue.Bucket.Transparent);
-        //tf.setColor(new ColorRGBA(1f, 1f, 1f, 0.25f));
         return myWindow;
     }
 

@@ -363,8 +363,24 @@ public class SelTextField extends Panel {
         text.resetSelectColor(newColor);
     }
 
-    public ColorRGBA getSelectColor() {
-        return text.getselectColor();
+    public void resetSelectColor(ColorRGBA newselectColor1, ColorRGBA newselectColor2, ColorRGBA newselectColor3, ColorRGBA newselectColor4) {
+        text.resetSelectColor(newselectColor1, newselectColor2, newselectColor3, newselectColor4);
+    }
+
+    public ColorRGBA getSelectColor1() {
+        return text.getselectColor1();
+    }
+
+    public ColorRGBA getSelectColor2() {
+        return text.getselectColor2();
+    }
+
+    public ColorRGBA getSelectColor3() {
+        return text.getselectColor3();
+    }
+
+    public ColorRGBA getSelectColor4() {
+        return text.getselectColor4();
     }
 
     public void adjustText(int startline, boolean fulladjust, boolean wordwrap) {

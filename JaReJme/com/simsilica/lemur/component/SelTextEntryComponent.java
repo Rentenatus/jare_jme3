@@ -47,10 +47,12 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.event.KeyInputEvent;
 import com.jme3.math.*;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
 import com.jme3.scene.shape.Quad;
+import com.jme3.scene.shape.QuadGradient;
 
 import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.HAlignment;
@@ -222,10 +224,13 @@ public class SelTextEntryComponent extends AbstractGuiComponent
 
     private int scrollMode;
     private int maxLinecount; //max numbers of lines
-    private ColorRGBA selectorColor = new ColorRGBA(0.2f, 0.3f, 0.4f, 1f);
+    private ColorRGBA selectorColor1 = new ColorRGBA(0.2f, 0.3f, 0.4f, 1f);
+    private ColorRGBA selectorColor2 = selectorColor1;
+    private ColorRGBA selectorColor3 = selectorColor1;
+    private ColorRGBA selectorColor4 = selectorColor1;
     private int txtselmodeint;
     private int offset_x = 0;
-    private Quad textselectQuad;
+    private Mesh textselectQuad;
     private Geometry selectbar;
     private boolean readonly = false; // prevent key input in textfields
 
@@ -1388,6 +1393,8 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         float y;
         int z = 0;
 
+        boolean gradient = selectorColor1 != selectorColor2 || selectorColor1 != selectorColor3 || selectorColor1 != selectorColor4;
+
         removTextselectQuads();
 
         // we get our field of anchors
@@ -1397,7 +1404,9 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         anc = model.getAnchors();
         // some general settings
         selectorNode.setName("selectorNode");
-        GuiMaterial mat = GuiGlobals.getInstance().createMaterial(selectorColor, false);
+        GuiMaterial mat = gradient
+                ? GuiGlobals.getInstance().createMaterial(false)
+                : GuiGlobals.getInstance().createMaterial(selectorColor1, false);
 
         if (textBox == null) {
             // getDocumentModel().setText(getDocumentModel().getfullText());
@@ -1456,7 +1465,10 @@ public class SelTextEntryComponent extends AbstractGuiComponent
                     continue;
                 }
 
-                textselectQuad = new Quad(xende - xstart, bitmapText.getLineHeight());
+                mat.getMaterial().setBoolean("VertexColor", gradient);
+                textselectQuad = gradient
+                        ? new QuadGradient(xende - xstart, bitmapText.getLineHeight(), selectorColor1, selectorColor2, selectorColor3, selectorColor4)
+                        : new Quad(xende - xstart, bitmapText.getLineHeight());
                 selectbar = new Geometry("selectbar" + z, textselectQuad);
                 z++;
                 selectbar.setMaterial(mat.getMaterial());
@@ -1470,13 +1482,33 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         bitmapText.attachChild(selectorNode);
     }
 
-    public void resetSelectColor(ColorRGBA newselectColor) {
-        selectorColor = new ColorRGBA(newselectColor.getRed(), newselectColor.getGreen(), newselectColor.getBlue(), selectorColor.getAlpha());
+    public void resetSelectColor(ColorRGBA newselectColor1, ColorRGBA newselectColor2, ColorRGBA newselectColor3, ColorRGBA newselectColor4) {
+        selectorColor1 = newselectColor1;
+        selectorColor2 = newselectColor2;
+        selectorColor3 = newselectColor3;
+        selectorColor4 = newselectColor4;
         makeTextselectQuads();
     }
 
-    public ColorRGBA getselectColor() {
-        return selectorColor;
+    public void resetSelectColor(ColorRGBA newselectColor) {
+        selectorColor4 = selectorColor3 = selectorColor2 = selectorColor1 = newselectColor;
+        makeTextselectQuads();
+    }
+
+    public ColorRGBA getselectColor1() {
+        return selectorColor1;
+    }
+
+    public ColorRGBA getselectColor2() {
+        return selectorColor2;
+    }
+
+    public ColorRGBA getselectColor3() {
+        return selectorColor3;
+    }
+
+    public ColorRGBA getselectColor4() {
+        return selectorColor4;
     }
 
     private void removTextselectQuads() {

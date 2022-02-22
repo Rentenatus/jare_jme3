@@ -349,10 +349,10 @@ public class TextEntryDemoState extends BaseAppState {
     protected void Color() {
         // our textselect can have different colors
         // please note, that the alpha will be ignored and is always 0.25
-        if (textField.getSelectColor().equals(new ColorRGBA(0,0,255,0.25f))) {
+        if (textField.getSelectColor1().equals(new ColorRGBA(0,0,1f,0.25f))) {
             textField.setSelectColor(new ColorRGBA(ColorRGBA.randomColor()));
         } else {
-            textField.setSelectColor(new ColorRGBA(0,0,255,0.25f));
+            textField.setSelectColor(new ColorRGBA(0,0,1f,0.25f));
         }
     }
 
