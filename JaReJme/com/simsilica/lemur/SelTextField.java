@@ -363,7 +363,7 @@ public class SelTextField extends Panel {
         text.resetSelectColor(newColor);
     }
 
-    public void resetSelectColor(ColorRGBA newselectColor1, ColorRGBA newselectColor2, ColorRGBA newselectColor3, ColorRGBA newselectColor4) {
+    public void setSelectColor(ColorRGBA newselectColor1, ColorRGBA newselectColor2, ColorRGBA newselectColor3, ColorRGBA newselectColor4) {
         text.resetSelectColor(newselectColor1, newselectColor2, newselectColor3, newselectColor4);
     }
 

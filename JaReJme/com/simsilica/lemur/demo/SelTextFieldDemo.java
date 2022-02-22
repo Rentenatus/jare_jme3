@@ -105,7 +105,7 @@ public class SelTextFieldDemo extends SimpleApplication {
     public Node testUI(SelState selState, ColorRGBA colA, ColorRGBA colB) {
         SelTextField tf = new SelTextField("1234567890");
         selState.addControlTo(tf);
-        tf.resetSelectColor(colA, colA, colB, colB);
+        tf.setSelectColor(colA, colA, colB, colB);
         return testUI(tf);
     }
 
