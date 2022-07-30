@@ -426,8 +426,8 @@ public class SelTextField extends Panel {
         text.actionSelectAll();
     }
 
-    public void addMenuItem(String itemText, SelTextCommand clickCommands) {
-        MenuItem mi = new MenuItem(itemText, clickCommands);
+    public void addMenuItem(String itemText, String itemHotKey, SelTextCommand clickCommands) {
+        MenuItem mi = new MenuItem(itemText, itemHotKey, clickCommands);
         if (clickCommands != null) {
             clickCommands.setSelTextField(this);
         }

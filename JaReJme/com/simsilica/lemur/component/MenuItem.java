@@ -47,19 +47,22 @@ public class MenuItem {
     public final static String USERDATA_P2 = "MenuItem.UserDataParam2";
 
     private String itemText;
+    private String itemHotKey;
     private MenuItemCommand clickCommand;
     private boolean enabled;
     private String parameter1;
     private String parameter2;
 
-    public MenuItem(String itemText) {
+    public MenuItem(String itemText, String itemHotKey) {
         this.itemText = itemText;
+        this.itemHotKey = itemHotKey;
         this.clickCommand = printlnClickCommands();
         this.enabled = true;
     }
 
-    public MenuItem(String itemText, MenuItemCommand clickCommand) {
+    public MenuItem(String itemText, String itemHotKey, MenuItemCommand clickCommand) {
         this.itemText = itemText;
+        this.itemHotKey = itemHotKey;
         this.clickCommand = clickCommand;
         this.enabled = true;
     }
@@ -84,6 +87,15 @@ public class MenuItem {
 
     public void setItemText(ChangeItemListener listener, String itemText) {
         this.itemText = itemText;
+        listener.itemChanged(this);
+    }
+
+    public String getItemHotKey() {
+        return itemHotKey;
+    }
+
+    public void setItemHotKey(ChangeItemListener listener, String itemHotKey) {
+        this.itemHotKey = itemHotKey;
         listener.itemChanged(this);
     }
 

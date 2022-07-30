@@ -402,7 +402,7 @@ public class TextEntryDemoState extends BaseAppState {
                     document.updateCarat(true, cvalue, true);
                 }
                 //  initialstart =document.getCarat();
-                before = document.getCarat();;
+                before = document.getCarat();
                 if (event.getButtonIndex() == 0)  press = true;
                 if (event.getButtonIndex() == 1) press2 = true;
 

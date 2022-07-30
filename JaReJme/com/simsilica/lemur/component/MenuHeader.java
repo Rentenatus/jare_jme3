@@ -51,12 +51,12 @@ public class MenuHeader {
     private ViewPort view;
     
     public MenuHeader(String itemText) {
-        this.headerItem = new MenuItem(itemText, headerClickCommand());
+        this.headerItem = new MenuItem(itemText, "",  headerClickCommand());
         this.menu = new PopUpMenu();
     }
     
     public MenuHeader(String itemText, PopUpMenu subMenu) {
-        this.headerItem = new MenuItem(itemText, headerClickCommand());
+        this.headerItem = new MenuItem(itemText, "", headerClickCommand());
         this.menu = subMenu;
     }
     

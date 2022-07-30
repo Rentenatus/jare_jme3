@@ -278,14 +278,14 @@ public class SelState extends BaseAppState {
         text = hasContent ? selTF.getDocumentModel().getselectedText() : null;
         boolean hasSelect = text != null && !text.isEmpty();
         MenuItem mi;
-        mi = pm.addMenuItem("Select all", newSelectAllAction(selTF));
+        mi = pm.addMenuItem("Select all", "", newSelectAllAction(selTF));
         mi.setEnabled(hasContent);
-        pm.addMenuItem("Delete", newDeleteAction(selTF));
-        mi = pm.addMenuItem("Cut", newCutAction(selTF));
+        pm.addMenuItem("Delete", "", newDeleteAction(selTF));
+        mi = pm.addMenuItem("Cut", "", newCutAction(selTF));
         mi.setEnabled(hasSelect);
-        mi = pm.addMenuItem("Copy", newCopyAction(selTF));
+        mi = pm.addMenuItem("Copy", "", newCopyAction(selTF));
         mi.setEnabled(hasSelect);
-        pm.addMenuItem("Paste", newPasteAction(selTF));
+        pm.addMenuItem("Paste", "", newPasteAction(selTF));
     }
 
     protected SelTextCommand newDeleteAction(SelTextField actionElement) {

@@ -39,6 +39,8 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.ViewPort;
+import com.simsilica.lemur.component.BorderLayout;
+import com.simsilica.lemur.component.BorderLayout.Position;
 import com.simsilica.lemur.component.ChangeItemListener;
 import com.simsilica.lemur.component.MenuItem;
 import com.simsilica.lemur.component.QuadBackgroundComponent;
@@ -67,16 +69,16 @@ public class PopUpMenu extends Container implements ChangeItemListener {
         menuList.add(item);
     }
 
-    public MenuItem addMenuItem(String itemText) {
+    public MenuItem addMenuItem(String itemText, String itemHotKey) {
         uptodate = false;
-        MenuItem mi = new MenuItem(itemText);
+        MenuItem mi = new MenuItem(itemText, itemHotKey);
         menuList.add(mi);
         return mi;
     }
 
-    public MenuItem addMenuItem(String itemText, MenuItemCommand clickCommand) {
+    public MenuItem addMenuItem(String itemText, String itemHotKey, MenuItemCommand clickCommand) {
         uptodate = false;
-        MenuItem mi = new MenuItem(itemText, clickCommand);
+        MenuItem mi = new MenuItem(itemText, itemHotKey, clickCommand);
         menuList.add(mi);
         return mi;
     }
@@ -103,6 +105,7 @@ public class PopUpMenu extends Container implements ChangeItemListener {
                 getWorldScale().getY() + 1.2f,
                 getWorldScale().getX());
         Container inner = addChild(new Container());
+        //inner.setLayout(new BorderLayout());
         inner.setInsets(insets3f);
 
         for (MenuItem menuItem : menuList) {
@@ -123,7 +126,10 @@ public class PopUpMenu extends Container implements ChangeItemListener {
                 GuiComponent myBG = new QuadBackgroundComponent(new ColorRGBA(0.18f, 0.03f, 0.8f, 0.72f));
                 p.setBackground(myBG.clone());
                 p.setPreferredSize(new Vector3f(20f, 2f, 0f));
-
+            }
+            if (menuItem.getItemText() != null && !menuItem.getItemText().isEmpty()
+                    && menuItem.getItemHotKey() != null && !menuItem.getItemHotKey().isEmpty()) {
+                inner.addChild(new Label(menuItem.getItemHotKey()), 2);
             }
         }
         GuiComponent myBG = new QuadBackgroundComponent(new ColorRGBA(0.08f, 0.03f, 0.08f, 0.72f));
@@ -135,7 +141,7 @@ public class PopUpMenu extends Container implements ChangeItemListener {
 
     protected void show() {
         if (!uptodate) {
-            rebuild();   
+            rebuild();
         }
         PopupState popupState = GuiGlobals.getInstance().getPopupState();
         popupState.showPopup(this);
