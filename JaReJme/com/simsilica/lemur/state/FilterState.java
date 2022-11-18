@@ -31,42 +31,48 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.simsilica.lemur.event;
+package com.simsilica.lemur.state;
 
-import com.simsilica.lemur.PopUpMenu;
+import com.jme3.app.Application;
+import com.jme3.app.state.BaseAppState;
+import com.simsilica.lemur.PopUpListPicker;
 
 /**
  *
  * @author Janusch Rentenatus
  */
-public abstract class JaReMenuItemCommand implements MenuItemCommand {
+public class FilterState extends BaseAppState {
 
-    private PopUpMenu pm;
-    private int position;
+    private final PopUpListPicker picker;
 
-    public JaReMenuItemCommand() {
-        this.pm = null;
-        this.position = -1;
-    }
-
-    public JaReMenuItemCommand(int position) {
-        this.pm = null;
-        this.position = position;
-    }
-
-    public void closePopupMenu() {
-        if (pm != null) {
-            pm.close();
-        }
+    public FilterState(Application app, PopUpListPicker picker) {
+        this.picker = picker;
     }
 
     @Override
-    public void setPopUpMenu(PopUpMenu pm) {
-        this.pm = pm;
+    protected void initialize(Application app) {
+
     }
 
-    public int getPosition() {
-        return position;
+    @Override
+    public void update(final float tpf) {
+        picker.checkFilter();
+        super.update(tpf);
+    }
+
+    @Override
+    protected void cleanup(Application app) {
+        // noop
+    }
+
+    @Override
+    protected void onEnable() {
+        // noop
+    }
+
+    @Override
+    protected void onDisable() {
+        // noop
     }
 
 }

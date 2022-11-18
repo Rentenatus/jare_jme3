@@ -218,6 +218,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
     private Geometry cursor;
     private SelDocumentModel model;
     private boolean singleLine;
+    private boolean focusable = true;
     private boolean focused;
     private boolean cursorVisible = true;
     private Float preferredCursorWidth = null;
@@ -329,12 +330,16 @@ public class SelTextEntryComponent extends AbstractGuiComponent
 
     @Override
     public boolean isFocusable() {
-        return true; // should return isEnabled() when we have one
+        return focusable;
+    }
+
+    public void setFocusable(boolean focusable) {
+        this.focusable = focusable;
     }
 
     @Override
     public void focusGained() {
-        if (this.focused) {
+        if (this.focused || !focusable) {
             return;
         }
         this.focused = true;
@@ -344,7 +349,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
 
     @Override
     public void focusLost() {
-        if (!this.focused) {
+        if (!this.focused || !focusable) {
             return;
         }
         this.focused = false;
@@ -700,6 +705,7 @@ public class SelTextEntryComponent extends AbstractGuiComponent
         textBox = new Rectangle(0, 0, size.x, size.y);
         bitmapText.setBox(textBox);
         resetAlignment();
+        makeTextselectQuads();
     }
 
     @Override

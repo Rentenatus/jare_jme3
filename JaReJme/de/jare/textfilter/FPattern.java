@@ -31,42 +31,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.simsilica.lemur.event;
-
-import com.simsilica.lemur.PopUpMenu;
+package de.jare.textfilter;
 
 /**
  *
  * @author Janusch Rentenatus
  */
-public abstract class JaReMenuItemCommand implements MenuItemCommand {
+public class FPattern {
 
-    private PopUpMenu pm;
-    private int position;
+    private final char modus;
+    private final String text;
 
-    public JaReMenuItemCommand() {
-        this.pm = null;
-        this.position = -1;
+    FPattern(char modus, String text) {
+        this.modus = modus;
+        this.text = text;
     }
 
-    public JaReMenuItemCommand(int position) {
-        this.pm = null;
-        this.position = position;
+    public char getModus() {
+        return modus;
     }
 
-    public void closePopupMenu() {
-        if (pm != null) {
-            pm.close();
-        }
-    }
-
-    @Override
-    public void setPopUpMenu(PopUpMenu pm) {
-        this.pm = pm;
-    }
-
-    public int getPosition() {
-        return position;
+    public String getText() {
+        return text;
     }
 
 }

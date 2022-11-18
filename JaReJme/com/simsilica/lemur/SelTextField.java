@@ -65,50 +65,50 @@ import java.util.List;
  * @author Janusch Rentenatus
  */
 public class SelTextField extends Panel {
-
+    
     public static final String ELEMENT_ID = "textField";
     public static final String LAYER_TEXT = "text";
-
+    
     private VersionedList<MenuItem> menuList = new VersionedList<>();
-
+    
     public List<MenuItem> getMenuList() {
         return menuList;
     }
-
+    
     public enum ScrollMode {
         None, Full, AutoadjustX, AutoadjustY
     }
-
+    
     public enum TextselectMode {
         Off, Auto, Manuell
     }
-
+    
     private SelTextEntryComponent text;
-
+    
     public SelTextField(String text) {
         this(new DefaultSelDocumentModel(text), true, new ElementId(ELEMENT_ID), null);
     }
-
+    
     public SelTextField(SelDocumentModel model) {
         this(model, true, new ElementId(ELEMENT_ID), null);
     }
-
+    
     public SelTextField(String text, String style) {
         this(new DefaultSelDocumentModel(text), true, new ElementId(ELEMENT_ID), style);
     }
-
+    
     public SelTextField(String text, ElementId elementId) {
         this(new DefaultSelDocumentModel(text), true, elementId, null);
     }
-
+    
     public SelTextField(String text, ElementId elementId, String style) {
         this(new DefaultSelDocumentModel(text), true, elementId, style);
     }
-
+    
     public SelTextField(SelDocumentModel model, String style) {
         this(model, true, new ElementId(ELEMENT_ID), style);
     }
-
+    
     protected SelTextField(SelDocumentModel model, boolean applyStyles, ElementId elementId, String style) {
         super(false, elementId, style);
 
@@ -117,17 +117,17 @@ public class SelTextField extends Panel {
                 LAYER_BORDER,
                 LAYER_BACKGROUND,
                 LAYER_TEXT);
-
+        
         setDocumentModel(model);
-
+        
         addControl(new MouseEventControl(FocusMouseListener.INSTANCE));
-
+        
         if (applyStyles) { // applyStyles is always true!
             Styles styles = GuiGlobals.getInstance().getStyles();
             styles.applyStyles(this, elementId.getId(), style);
         }
     }
-
+    
     protected void setDocumentModel(SelDocumentModel model) {
         if (model == null) {
             return;
@@ -135,13 +135,13 @@ public class SelTextField extends Panel {
         this.text = createTextEntryComponent(model);
         getControl(GuiControl.class).setComponent(LAYER_TEXT, text);
     }
-
+    
     protected SelTextEntryComponent createTextEntryComponent(SelDocumentModel model) {
         Styles styles = GuiGlobals.getInstance().getStyles();
         BitmapFont font = styles.getAttributes(getElementId().getId(), getStyle()).get("font", BitmapFont.class);
         return new SelTextEntryComponent(model, font);
     }
-
+    
     @StyleDefaults(ELEMENT_ID)
     public static void initializeDefaultStyles(Attributes attrs) {
         /*
@@ -160,91 +160,95 @@ public class SelTextField extends Panel {
         attrs.set("Textselectmode", TextselectMode.Auto, false);
         attrs.set("readonly", false, false);
     }
-
+    
     public Map<KeyAction, SelKeyActionListener> getActionMap() {
         return text.getActionMap();
     }
-
+    
     public SelDocumentModel getDocumentModel() {
         return text.getDocumentModel();
     }
-
+    
     @StyleAttribute(value = "text", lookupDefault = false)
     public void setText(String s) {
         text.setText(s);
     }
-
+    
     public String getText() { // returns the currently visible text
         return text == null ? null : text.getText();
     }
-
+    
     public String getfullText() {
         return text == null ? null : text.getfullText();
     }
-
+    
     @StyleAttribute(value = "textVAlignment", lookupDefault = false)
     public void setTextVAlignment(VAlignment a) {
         text.setVAlignment(a);
     }
-
+    
     public VAlignment getTextVAlignment() {
         return text.getVAlignment();
     }
-
+    
     @StyleAttribute(value = "textHAlignment", lookupDefault = false)
     public void setTextHAlignment(HAlignment a) {
         text.setHAlignment(a);
     }
-
+    
     public HAlignment getTextHAlignment() {
         return text.getHAlignment();
     }
-
+    
+    public void setFocusable(boolean focusable) {
+        text.setFocusable(focusable);
+    }
+    
     @StyleAttribute("font")
     public void setFont(BitmapFont f) {
         text.setFont(f);
     }
-
+    
     public BitmapFont getFont() {
         return text.getFont();
     }
-
+    
     @StyleAttribute("color")
     public void setColor(ColorRGBA color) {
         text.setColor(color);
     }
-
+    
     public ColorRGBA getColor() {
         return text == null ? null : text.getColor();
     }
-
+    
     @StyleAttribute("fontSize")
     public void setFontSize(float f) {
         text.setFontSize(f);
     }
-
+    
     public float getFontSize() {
         return text == null ? 0 : text.getFontSize();
     }
-
+    
     @StyleAttribute("singleLine")
     public void setSingleLine(boolean f) {
         text.setSingleLine(f);
     }
-
+    
     public boolean isSingleLine() {
         return text.isSingleLine();
     }
-
+    
     @StyleAttribute("preferredWidth")
     public void setPreferredWidth(float f) {
         text.setPreferredWidth(f);
     }
-
+    
     public float getPreferredWidth() {
         return text.getPreferredWidth();
     }
-
+    
     @StyleAttribute("preferredLineCount")
     public void setPreferredLineCount(int i) {
         text.setPreferredLineCount(i);
@@ -253,25 +257,25 @@ public class SelTextField extends Panel {
             setmaxLinecount(i);
         }
     }
-
+    
     public int getPreferredLineCount() {
         return text.getPreferredLineCount();
     }
-
+    
     @StyleAttribute(value = "readonly", lookupDefault = false)
     public void setreadonly(boolean readonly) {
         text.setReadonlymode(readonly);
     }
-
+    
     public boolean getReadonlymode() {
         return text.getReadonlymode();
     }
-
+    
     @Override
     public String toString() {
         return getClass().getName() + "[text=" + getText() + ", color=" + getColor() + ", elementId=" + getElementId() + "]";
     }
-
+    
     @StyleAttribute("Scrollmode")
     public void setScrollMode(ScrollMode sm) {
         /*
@@ -299,16 +303,16 @@ public class SelTextField extends Panel {
         }
         text.setScrollMode(smint);
     }
-
+    
     @StyleAttribute("maxLinecount")
     public void setmaxLinecount(int i) {
         text.setMaxLinecount(i);
     }
-
+    
     public int getmaxLinecount() {
         return text.getMaxLinecount();
     }
-
+    
     public void setTextselectmode(boolean onoff) {
         if (onoff) {
             setTextselectmode(TextselectMode.Auto);
@@ -316,7 +320,7 @@ public class SelTextField extends Panel {
             setTextselectmode(TextselectMode.Off);
         }
     }
-
+    
     @StyleAttribute("Textselectmode") // 2 style attributes for same procedure is not possible
     public void setTextselectmode(TextselectMode mode) {
         /*
@@ -340,7 +344,7 @@ public class SelTextField extends Panel {
         }
         text.setTxtselmodeint(tmp);
     }
-
+    
     public TextselectMode getTextselectmode() {
         int tmp = text.getTextselectModeint();
         switch (tmp) {
@@ -353,41 +357,41 @@ public class SelTextField extends Panel {
         }
         return TextselectMode.Off;
     }
-
+    
     public boolean isTextselect() {
         return text.isTextselect();
     }
-
+    
     @StyleAttribute("TextselectColor")
     public void setSelectColor(ColorRGBA newColor) {
         text.resetSelectColor(newColor);
     }
-
+    
     public void setSelectColor(ColorRGBA newselectColor1, ColorRGBA newselectColor2, ColorRGBA newselectColor3, ColorRGBA newselectColor4) {
         text.resetSelectColor(newselectColor1, newselectColor2, newselectColor3, newselectColor4);
     }
-
+    
     public ColorRGBA getSelectColor1() {
         return text.getselectColor1();
     }
-
+    
     public ColorRGBA getSelectColor2() {
         return text.getselectColor2();
     }
-
+    
     public ColorRGBA getSelectColor3() {
         return text.getselectColor3();
     }
-
+    
     public ColorRGBA getSelectColor4() {
         return text.getselectColor4();
     }
-
+    
     public void adjustText(int startline, boolean fulladjust, boolean wordwrap) {
         fulladjust = !fulladjust;
         text.textadjust(startline, fulladjust, wordwrap);
     }
-
+    
     public int[] getTextlinesbyCoordinates(int[] coordinatesXY) {
         return text.getTextlineYX(coordinatesXY);
     }
@@ -401,31 +405,31 @@ public class SelTextField extends Panel {
     public void setPreferredCursorWidth(Float f) {
         text.setPreferredCursorWidth(f);
     }
-
+    
     public Float getPreferredCursorWidth() {
         return text.getPreferredCursorWidth();
     }
-
+    
     public void actionDelete() {
         text.actionDelete();
     }
-
+    
     public void actionCopyCut() {
         text.actionCopyCut();
     }
-
+    
     public void actionCopySelect() {
         text.actionCopySelect();
     }
-
+    
     public void actionPaste() {
         text.actionPaste();
     }
-
+    
     public void actionSelectAll() {
         text.actionSelectAll();
     }
-
+    
     public void addMenuItem(String itemText, String itemHotKey, SelTextCommand clickCommands) {
         MenuItem mi = new MenuItem(itemText, itemHotKey, clickCommands);
         if (clickCommands != null) {

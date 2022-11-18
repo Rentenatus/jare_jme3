@@ -37,18 +37,167 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
+import com.simsilica.lemur.Button;
 import com.simsilica.lemur.Container;
 import com.simsilica.lemur.GuiGlobals;
+import com.simsilica.lemur.HAlignment;
 import com.simsilica.lemur.Label;
+import com.simsilica.lemur.PopUpListPicker;
 import com.simsilica.lemur.SelTextField;
 import com.simsilica.lemur.state.SelState;
 import com.simsilica.lemur.style.BaseStyles;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author Janusch Rentenatus
  */
 public class SelTextFieldDemo extends SimpleApplication {
+
+    public static String[] LEMUR = new String[]{"AbstractCursorEvent",
+        "AbstractEffect",
+        "AbstractGuiComponent",
+        "AbstractGuiControlListener",
+        "AbstractNodeControl",
+        "AbstractTween",
+        "AnalogFunctionListener",
+        "Animation",
+        "AnimationState",
+        "Attributes",
+        "Axis",
+        "Axis",
+        "BaseAppState",
+        "BasePickState",
+        "BaseStyles",
+        "BasicDemo",
+        "BorderLayout",
+        "BorderLayout.Position",
+        "BoxLayout",
+        "Button",
+        "Button",
+        "Button.ButtonAction",
+        "CameraTweens",
+        "Checkbox",
+        "Checkbox.ToggleCommand",
+        "CheckboxModel",
+        "ColoredComponent",
+        "Command",
+        "CommandMap",
+        "ComponentStack",
+        "ConsumingMouseListener",
+        "Container",
+        "ContainsSelector",
+        "CursorButtonEvent",
+        "CursorEventControl",
+        "CursorListener",
+        "CursorMotionEvent",
+        "DefaultCheckboxModel",
+        "DefaultCursorListener",
+        "DefaultDocumentModel",
+        "DefaultFocusTraversalControl",
+        "DefaultMouseListener",
+        "DefaultRangedValueModel",
+        "DefaultRawInputListener",
+        "Deformation",
+        "Deformations",
+        "Deformations.Cylindrical",
+        "Deformations.Ramp",
+        "DMesh",
+        "DocumentModel",
+        "DocumentModelFilter",
+        "DragHandler",
+        "DynamicInsetsComponent",
+        "Effect",
+        "EffectControl",
+        "EffectInfo",
+        "ElementId",
+        "ElementSelector",
+        "FillMode",
+        "FocusChangeEvent",
+        "FocusChangeListener",
+        "FocusManagerState",
+        "FocusMouseListener",
+        "FocusNavigationFunctions",
+        "FocusNavigationState",
+        "FocusTarget",
+        "FocusTraversal",
+        "FocusTraversal.TraversalDirection",
+        "FocusTraversalAdapter",
+        "FunctionId",
+        "GuiComponent",
+        "GuiControl",
+        "GuiControlListener",
+        "GuiGlobals",
+        "GuiLayout",
+        "GuiMaterial",
+        "GuiUpdateListener",
+        "HAlignment",
+        "HoverMouseListener",
+        "IconComponent",
+        "InputConfigListener",
+        "InputDevice",
+        "InputDevice.DeviceAxis",
+        "InputDevice.DeviceButton",
+        "InputMapper",
+        "InputMapper.Mapping",
+        "InputState",
+        "Insets3f",
+        "InsetsComponent",
+        "KeyAction",
+        "KeyActionListener",
+        "KeyInterceptState",
+        "KeyListener",
+        "KeyModifiers",
+        "Label",
+        "LayerComparator",
+        "LightingMaterialAdapter",
+        "MBox",
+        "MethodCommand",
+        "ModifiedKeyInputEvent",
+        "MouseAppState",
+        "MouseEventControl",
+        "MouseListener",
+        "Panel",
+        "PanelTweens",
+        "PasswordField",
+        "PickEventSession",
+        "PickEventSession.RootEntry",
+        "PickState",
+        "PopupState",
+        "PopupState.ClickMode",
+        "ProgressBar",
+        "QuadBackgroundComponent",
+        "RangedValueModel",
+        "RollupPanel",
+        "Selector",
+        "Slider",
+        "SpatialTweens",
+        "SpringGridLayout",
+        "StateFunctionListener",
+        "StateMethodDelegate",
+        "StyleAttribute",
+        "StyleDebugMouseListener",
+        "StyleDefaults",
+        "StyleLoader",
+        "Styles",
+        "StyleTree",
+        "TabbedPanel",
+        "TbtQuad",
+        "TbtQuadBackgroundComponent",
+        "TextComponent",
+        "TextEntryComponent",
+        "TextField",
+        "TextFilters",
+        "TouchAppState",
+        "Tween",
+        "TweenAnimation",
+        "Tweens",
+        "UnshadedMaterialAdapter",
+        "VAlignment",
+        "VersionedHolder",
+        "VersionedObject",
+        "VersionedReference",};
 
     public static void main(String[] args) {
         SelTextFieldDemo app = new SelTextFieldDemo();
@@ -93,6 +242,26 @@ public class SelTextFieldDemo extends SimpleApplication {
         t3.setLocalTranslation(-12, 0, -401);
         t1.scale(1.2f);
 
+        Node t4 = button();
+        rootNode.attachChild(t4);
+        t4.setLocalTranslation(-40, 0, -100);
+        t4.scale(1.5f);
+    }
+
+    public Node button() {
+        Button popButton = new Button("v");
+
+        popButton.setMaxWidth(18f);
+        popButton.setTextHAlignment(HAlignment.Center);
+
+        List<String> items
+                = Arrays.asList(LEMUR);
+
+        PopUpListPicker plp = PopUpListPicker.onButton(this, popButton, items, 1f);
+        plp.setColor(ColorRGBA.White);
+        plp.setSelectColor(new ColorRGBA(0.2f, 0.2f, 0.6f, 1f), new ColorRGBA(0.2f, 0.2f, 0.6f, 1f), new ColorRGBA(0.3f, 0.1f, 0.4f, 1f), new ColorRGBA(0.3f, 0.1f, 0.4f, 1f));
+
+        return popButton;
     }
 
     public Node testUI(SelState selState, ColorRGBA col) {
