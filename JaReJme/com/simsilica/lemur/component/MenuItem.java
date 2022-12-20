@@ -39,7 +39,7 @@ import com.simsilica.lemur.event.MenuItemCommand;
 
 /**
  *
- * @author hpJanusch
+ * @author Janusch Rentenatus  
  */
 public class MenuItem {
 

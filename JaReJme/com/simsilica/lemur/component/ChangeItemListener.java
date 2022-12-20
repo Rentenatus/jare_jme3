@@ -37,7 +37,7 @@ import java.util.EventListener;
 
 /**
  *
- * @author hpJanusch
+ * @author Janusch Rentenatus  
  */
 public interface ChangeItemListener extends EventListener {
     

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Languages demo.
+ @author Janusch Rentenatus
+-->
+
+
+<Languages>
+    <EN>
+        <entry name="Class.SimpleXmlDocument">document</entry>
+        <entry name="Class.SimpleXmlTag">tag</entry>
+        <entry name="Class.SimpleXmlValue">value</entry>
+
+        <entry name="Class.MFDocumentation">documantation</entry>
+        <entry name="Class.MFEnum">enumeration</entry>
+        <entry name="Class.MFEnumEntry">entry</entry>
+        <entry name="Class.MFClass">class</entry>
+        <entry name="Class.MFField">field</entry>
+        <entry name="Class.MFOpParameter">parameter</entry>
+        <entry name="Class.MFOpReturn">return</entry>
+        <entry name="Class.MFOperation">operation</entry>
+        <entry name="Class.MFRepRoot">model</entry>
+        <entry name="Class.MFRepBasic{Enums}">repository Enums</entry>
+        <entry name="Class.MFRepBasic{Transient}">repository Transient</entry>
+        <entry name="Class.MFRepBasic{Prototype}">repository Prototype</entry>
+        <entry name="Class.MFRepBasic{Entity}">repository Entity</entry>
+        <entry name="Class.MFRepository">repository</entry>
+        <entry name="Class.MFRepositoryE">repository</entry>
+
+        
+        <entry name="Tree.Element">element</entry>
+        <entry name="Tree.Element.QName">q. name</entry>
+        <entry name="Menu.addSubordinate">Add subordinate</entry>
+        <entry name="Menu.addEvenlyBefore">Add evenly before</entry>
+        <entry name="Menu.addEvenlyAfter">Add evenly after</entry>
+        <entry name="Menu.clear">Clear</entry>
+        <entry name="Menu.delete">Delete</entry>
+        <entry name="Menu.deleteChild">Delete child</entry>
+        <entry name="Menu.deleteChildren">Delete children</entry>
+        <entry name="Menu.cut">Cut</entry>
+        <entry name="Menu.cutChild">Cut child</entry>
+        <entry name="Menu.cutChildren">Cut children</entry>
+        <entry name="Menu.copy">Copy</entry>
+        <entry name="Menu.copyChild">Copy child</entry>
+        <entry name="Menu.copyChildren">Copy children</entry>
+        <entry name="Menu.paste">Paste</entry>
+        <entry name="Menu.childrenColapse">Colapse</entry>
+        <entry name="Menu.childrenExpand">Expand</entry>
+        <entry name="Menu.childrenExpandDeep">Expand deep</entry>
+        <entry name="Menu.childrenExpandFlat">Expand flat</entry>
+        <entry name="Menu.selectAll">Select all</entry>
+        <entry name="Menu.removeProperty">Remove property</entry>
+        <entry name="Menu.unsetFavProperty">Unset from favorites</entry>
+        <entry name="Menu.localFavProperty">Set to local favorites</entry>
+        <entry name="Menu.globalFavProperty">Set to global favorites</entry>
+        <entry name="Menu.addProperty">Add property [:]</entry>
+        <entry name="Invalid.minimumReached">minimum reached</entry>
+        <entry name="Invalid.needAChild">need a child</entry>
+        <entry name="Invalid.needChildren">need children</entry>
+    </EN>
+   
+    <DE>
+        <entry name="Class.SimpleXmlDocument">Dokument</entry>
+        <entry name="Class.SimpleXmlTag">Tag</entry>
+        <entry name="Class.SimpleXmlValue">Wert</entry>
+        <entry name="Tree.Element">Element</entry>
+    </DE>
+</Languages>
