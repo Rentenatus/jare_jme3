@@ -75,9 +75,9 @@ public class SimJoystick extends Container {
         clearChildren();
         JoyLayout layout = new JoyLayout();
         setLayout(layout);
-        imDir = new IconComponent("Textures/joystick/directions.png");
+        imDir = new IconComponent("assets/Textures/joystick/directions.png");
         imDir.setColor(colDir);
-        imDot = new IconComponent("Textures/joystick/dotdir.png");
+        imDot = new IconComponent("assets/Textures/joystick/dotdir.png");
         imDot.setColor(colDot);
         Panel dirPanel = layout.addChild(new Panel());
         Panel dotPanel = layout.addChild(new Panel());
