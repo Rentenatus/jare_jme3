@@ -10,7 +10,7 @@ import com.jme3.renderer.Camera;
 
 /**
  *
- * @author Janusch Rentenatus  
+ * @author Janusch Rentenatus
  */
 public interface JaReCamControl {
 
@@ -31,5 +31,15 @@ public interface JaReCamControl {
     public void moveCam(Vector2f moveDir, float maxWidth, float maxHeight);
 
     public void gotoPos(Vector3f gotoPos, Vector3f insensibility);
+
+    public void setMoveZoomSpeed(float moveZoomSpeed);
+
+    public void setMoveSlowSpeed(float moveSlowSpeed);
+
+    public void setMoveFastSpeed(float moveFastSpeed);
+
+    public void setRotateSlowSpeed(float rotateSlowSpeed);
+
+    public void setRotateFastSpeed(float rotateFastSpeed);
 
 }

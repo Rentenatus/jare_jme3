@@ -29,6 +29,12 @@ public class JaReCamControlSimpleXY implements JaReCamControl, JaReConst {
     private final JaReCamSteering camSteering;
     private InputManager inputManager;
     private float followSpeed;
+    private float moveZoomSpeed= 3f; 
+    private float moveSlowSpeed= 2f;
+    private float moveFastSpeed= 6f;
+    private float rotateSlowSpeed= 1f;
+    private float rotateFastSpeed= 2f;
+
 
     private final Camera cam;
     private Vector3f camPos;
@@ -43,6 +49,33 @@ public class JaReCamControlSimpleXY implements JaReCamControl, JaReConst {
         camSteering = new JaReCamHoveringXY();
         camSteering.init(cam);
     }
+
+    @Override
+    public void setMoveZoomSpeed(float moveZoomSpeed) {
+        this.moveZoomSpeed = moveZoomSpeed;
+    }
+
+    @Override
+    public void setMoveSlowSpeed(float moveSlowSpeed) {
+        this.moveSlowSpeed = moveSlowSpeed;
+    }
+
+    @Override
+    public void setMoveFastSpeed(float moveFastSpeed) {
+        this.moveFastSpeed = moveFastSpeed;
+    }
+
+    @Override
+    public void setRotateSlowSpeed(float rotateSlowSpeed) {
+        this.rotateSlowSpeed = rotateSlowSpeed;
+    }
+
+    @Override
+    public void setRotateFastSpeed(float rotateFastSpeed) {
+        this.rotateFastSpeed = rotateFastSpeed;
+    }
+    
+ 
 
     private final AnalogListener wasdListener = (name, value, tpf) -> {
         boolean noGuiFocus= GuiGlobals.getInstance().getFocusManagerState().getFocus()==null;
@@ -109,22 +142,22 @@ public class JaReCamControlSimpleXY implements JaReCamControl, JaReConst {
     };
 
     protected void zoomCamera(final float value) {
-        if (camSteering != null && cam != null) {
-            camPos = camSteering.zoomCamera(cam, speedShift ? value * 3 : value);
+        if (camSteering != null && cam != null) { 
+            camPos = camSteering.zoomCamera(cam, speedShift ? value * moveZoomSpeed : value);
             approachCampPos();
         }
     }
-
+   
     protected void moveCamera(final float value, final boolean sideways) {
-        if (camSteering != null && cam != null) {
-            camPos = camSteering.moveCamera(cam, speedShift ? value * 6 : value * 2, sideways);
+        if (camSteering != null && cam != null) { 
+            camPos = camSteering.moveCamera(cam, speedShift ? value * moveFastSpeed : value * moveSlowSpeed, sideways);
             approachCampPos();
         }
     }
-
+  
     void roteteCamera(final float value, final boolean sideways) {
-        if (camSteering != null && cam != null) {
-            camAxes = camSteering.rotateCamera(cam, speedShift ? value * 2 : value, sideways);
+        if (camSteering != null && cam != null) { 
+            camAxes = camSteering.rotateCamera(cam, speedShift ? value * rotateFastSpeed : value * rotateSlowSpeed, sideways);
             approachCamAxes();
         }
     }

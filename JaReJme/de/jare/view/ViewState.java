@@ -7,7 +7,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
 import com.jme3.input.InputManager;
-import com.jme3.input.controls.ActionListener;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
@@ -38,37 +37,13 @@ public class ViewState extends BaseAppState implements JaReConst {
         initMyKeys();
     }
 
-    //private final ActionListener rotateListener = (name, keyPressed, tpf) -> {
-    //    if (CAM_ROTATE.equals(name)) {
-    //        if (keyPressed) {
-    //            //???
-    //        } else {
-    //            //???
-    //        }
-    //    }
-    //};
-    //private final ActionListener markListener = (name, keyPressed, tpf) -> {
-    //    if (MOUSE_BUTTON_LEFT.equals(name) && !keyPressed) {
-    //        //???
-    //    }
-    //};
-    //private final ActionListener cursorListener = (name, keyPressed, tpf) -> {
-    //    //???
-    //};
     /**
      * Custom Keybinding: Map named actions to inputs.
      */
     protected void initMyKeys() {
         final InputManager inputManager = getApplication().getInputManager();
         JaReKeybinding.initInputManager(inputManager);
-        //inputManager.removeListener(rotateListener);
-        //inputManager.removeListener(markListener);
-        //inputManager.removeListener(cursorListener);
 
-        // Add the names to the asction listener.
-        //inputManager.addListener(rotateListener, CAM_ROTATE);
-        //inputManager.addListener(markListener, MOUSE_BUTTON_LEFT);
-        //inputManager.addListener(cursorListener, AXIS_LEFT, AXIS_RIGHT, AXIS_UP, AXIS_DOWN);
         camControl.initMyKeys(inputManager);
     }
 
@@ -114,4 +89,31 @@ public class ViewState extends BaseAppState implements JaReConst {
         return camControl.getCamera().getLocation();
     }
 
+    public void setMoveZoomSpeed(float moveZoomSpeed) {
+        camControl.setMoveZoomSpeed(moveZoomSpeed);
+    }
+
+    public void setMoveSlowSpeed(float moveSlowSpeed) {
+        camControl.setMoveSlowSpeed(moveSlowSpeed);
+    }
+
+    public void setMoveFastSpeedfloatint(float moveFastSpeed) {
+        camControl.setMoveFastSpeed(moveFastSpeed);
+    }
+
+    public void setRotateSlowSpeed(float rotateSlowSpeed) {
+        camControl.setRotateSlowSpeed(rotateSlowSpeed);
+    }
+
+    public void setRotateFastSpeed(float rotateFastSpeed) {
+        camControl.setRotateFastSpeed(rotateFastSpeed);
+    }
+
+    public void setSpeed(float moveZoomSpeed, float moveSlowSpeed, float moveFastSpeed, float rotateSlowSpeed, float rotateFastSpeed) {
+        camControl.setMoveZoomSpeed(moveZoomSpeed);
+        camControl.setMoveSlowSpeed(moveSlowSpeed);
+        camControl.setMoveFastSpeed(moveFastSpeed);
+        camControl.setRotateSlowSpeed(rotateSlowSpeed);
+        camControl.setRotateFastSpeed(rotateFastSpeed);
+    }
 }

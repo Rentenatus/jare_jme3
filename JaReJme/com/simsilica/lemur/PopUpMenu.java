@@ -61,8 +61,22 @@ public class PopUpMenu extends PopUp implements ChangeItemListener {
         itemChanged(item);
     }
 
+    public MenuItem addMenuItem(String itemText) {
+        MenuItem mi = new MenuItem(itemText, "");
+        menuList.add(mi);
+        itemChanged(mi);
+        return mi;
+    }
+
     public MenuItem addMenuItem(String itemText, String itemHotKey) {
         MenuItem mi = new MenuItem(itemText, itemHotKey);
+        menuList.add(mi);
+        itemChanged(mi);
+        return mi;
+    }
+
+    public MenuItem addMenuItem(String itemText, MenuItemCommand clickCommand) {
+        MenuItem mi = new MenuItem(itemText, "", clickCommand);
         menuList.add(mi);
         itemChanged(mi);
         return mi;
